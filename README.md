@@ -1,6 +1,30 @@
 # 🐳 Docker Compose for Laravel 🐘
 A Docker Compose setup for Laravel projects, inspired by [this repo](https://github.com/aschmelyun/docker-compose-laravel).
 
+## Note on refactor
+Deploying the app through popular tools such as deployer don't accept the application being within a sub-directory. Plus the way this is handled for existing projects doesn't really work *smoothly*.
+
+I think maybe I'd rather the script alter the structure of the application, although this is performing changes to the users application structure that shouldn't be performed as its out of scope and *touching their things*.
+
+Although this does come with the benefit that I can utilise the `.env` from Laravel to dictate the information for the `database` container, such like:
+
+```YAML
+...
+
+services:
+  database:
+    ...
+    container_name: ${DB_HOST}
+    ports:
+      - ${DB_PORT}:3306
+    environment:
+      MYSQL_DATABASE: ${DB_DATABASE}
+      MYSQL_USER: ${DB_USERNAME}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+      ...
+```
+
 ## Table of contents
 * [Docker Compose for Laravel](#-docker-compose-for-laravel-)
 * [Table of contents](#table-of-contents)
