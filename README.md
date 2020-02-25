@@ -10,17 +10,21 @@ Although this does come with the benefit that I can utilise the `.env` from Lara
 
 ```ENV
 # .env.example
-
+...
 DB_CONNECTION=mysql
 DB_HOST=database
-DB_PORT=3306          # 'Docker network' access
-DB_EXT_PORT=33069     # Localhost/external access
+DB_PORT=3306          # 'Docker network' access:
+                      # - Web server will access via this as it will be on the virtual network.
+DB_EXT_PORT=33069     # Localhost/external access:
+                      # - Development machines and any device coming in outside of the virtual network.
 DB_DATABASE=homestead
 DB_USERNAME=homestead
 DB_PASSWORD=secret
+...
 ```
 
 ```YAML
+# docker-compose.yml
 ...
 
 services:
