@@ -8,6 +8,18 @@ I think maybe I'd rather the script alter the structure of the application, alth
 
 Although this does come with the benefit that I can utilise the `.env` from Laravel to dictate the information for the `database` container, such like:
 
+```ENV
+# .env.example
+
+DB_CONNECTION=mysql
+DB_HOST=database
+DB_PORT=3306          # 'Docker network' access
+DB_EXT_PORT=33069     # Localhost/external access
+DB_DATABASE=homestead
+DB_USERNAME=homestead
+DB_PASSWORD=secret
+```
+
 ```YAML
 ...
 
@@ -16,7 +28,7 @@ services:
     ...
     container_name: ${DB_HOST}
     ports:
-      - ${DB_PORT}:3306
+      - ${DB_EXT_PORT}:${DB_PORT}
     environment:
       MYSQL_DATABASE: ${DB_DATABASE}
       MYSQL_USER: ${DB_USERNAME}
